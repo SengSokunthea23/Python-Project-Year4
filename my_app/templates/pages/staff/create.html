@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <section>
+        <div class="content"> 
+            <section class="content-header">
+                <h1>Create Staff</h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#"><i class="fa fa-dashboard"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Tables</a>
+                    </li>
+                    <li class="active">Simple</li>
+                </ol>
+            </section>
+ 
+            <section class="content">
+                <form action="{% url 'staff-store' %}" method="post">
+                        {% csrf_token %}
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+                                </div>
+                            </div> 
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input class="form-control" name="first_name" maxlength="50" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input class="form-control" name="last_name" maxlength="50" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Gender</label>
+                                            <select class="form-control" name="gender" required>
+                                                <option value="">Select Gender</option>
+                                                <option value="M">Male</option>
+                                                <option value="F">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <input class="form-control" type="date" name="date_of_birth" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Position</label>
+                                            <select class="form-control" name="position" required>
+                                                <option value="">Select Position</option>
+                                                {% for pos in positions %}
+                                                    <option value="{{ pos.id }}">{{ pos.position_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div> 
+                                </div> 
+                            </div> 
+                            <div class="box-footer">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                                <a class="btn btn-light" href="{% url 'positions' %}">Back</a>
+                            </div>
+                        </div> 
+                </form>
+            </section>
+        </div>
+    </section>
+{% endblock %}

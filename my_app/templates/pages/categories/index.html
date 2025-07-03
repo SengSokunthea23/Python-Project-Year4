@@ -1,0 +1,81 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+
+    <!-- Content Header -->
+    <section class="content-header">
+        <h1>Categories</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Simple</li>
+        </ol>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <a href="{% url 'category-create' %}" class="btn btn-primary">Create</a>
+                    </div>
+
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th style="width: 100px">Action</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for category in categories %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ category.name }}</td>
+                                    <td>
+                                        <span class="badge {% if category.status %}bg-success{% else %}bg-secondary{% endif %}">
+                                            {% if category.status %}
+                                                Active
+                                            {% else %}
+                                                Inactive
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'category-edit' category.id %}" class="btn btn-xs btn-warning">Edit</a>
+                                        <a href="{% url 'category-delete' category.id %}" class="btn btn-xs btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4">No categories found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div><!-- /.box-body -->
+
+                    {# Optional Pagination (Uncomment if needed) #}
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+
+                </div><!-- /.box -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </section><!-- /.content -->
+
+</div><!-- /.content-wrapper -->
+{% endblock %}
