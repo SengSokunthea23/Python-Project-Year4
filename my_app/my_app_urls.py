@@ -1,6 +1,6 @@
 
-from django.contrib import admin
-from django.urls import path 
+from django.contrib import admin # type: ignore
+from django.urls import path  # type: ignore
 from my_app import views
 from my_app import position_views
 from my_app import staff_views
