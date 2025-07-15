@@ -9,13 +9,22 @@ from my_app import staff_views
 urlpatterns = [
     path("", views.home),
     path("content", views.content),
-    #----------------categories-----------------
+    
+    #categories
     path("categories", views.categories, name="categories"),
     path("category/create", views.create_category, name="category-create"),
     path("category/store", views.store_category, name="categories-store"),
     path("category/edit/<int:category_id>", views.edit_category, name="category-edit"),
     path("category/update/<int:category_id>", views.update_category, name="category-update"),
     path("category/delete/<int:category_id>", views.delete_category, name="category-delete"),
+    
+    #product
+    path("product", views.categories, name="categories"),
+    path("product/create", views.create_category, name="category-create"),
+    path("product/store", views.store_category, name="categories-store"),
+    path("product/edit/<int:category_id>", views.edit_category, name="category-edit"),
+    path("product/update/<int:category_id>", views.update_category, name="category-update"),
+    path("product/delete/<int:category_id>", views.delete_category, name="category-delete"),
     
     # position
     path("positions", position_views.position_list, name="positions"),

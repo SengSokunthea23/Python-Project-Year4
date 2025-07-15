@@ -12,6 +12,24 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
 
+
+# Product model
+class Product(models.Model):
+    product_name = models.CharField(max_length=20, unique=True)
+    barcode = models.BigIntegerField(null=True, blank=True, unique=True)
+    sell_price = models.FloatField(null=True, blank=True)
+    unit_in_stock = models.BigIntegerField(null=True, blank=True)
+    photo = models.ImageField(upload_to='media/', null=True, blank=True)
+    # Use ForeignKey, not ForeignObject, with correct model reference
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.product_name or "Unnamed Product"
+
+    class Meta:
+        verbose_name_plural = "Products"
+
+
 # Sample model for testing
 class GeeksModel(models.Model):
     name = models.CharField(max_length=100)
@@ -19,6 +37,7 @@ class GeeksModel(models.Model):
 
     def __str__(self):
         return self.name
+
 
 # Position model
 class Position(models.Model):
@@ -32,7 +51,8 @@ class Position(models.Model):
     def __str__(self):
         return self.position_name
 
-# Staff model with gender, name, DOB, and position FK
+
+# Staff model
 class Staff(models.Model):
     GENDER_CHOICES = [
         ('M', 'Male'),
